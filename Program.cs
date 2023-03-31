@@ -2,8 +2,11 @@
 
 internal static class Program
 {
+  const bool DEBUG = true;
   static void Main()
   {
-    Console.WriteLine("Hello, World!");
+    // Read and parse adjacency matrix from CSV
+    double[,] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
+    if (DEBUG) { Track.Progress.ParsedSquareMatrix(matrix); }
   }
 }
