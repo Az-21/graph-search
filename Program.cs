@@ -7,6 +7,6 @@ internal static class Program
   {
     // Read and parse adjacency matrix from CSV
     double[,] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
-    if (DEBUG) { Track.Progress.ParsedSquareMatrix(matrix); }
+    if (DEBUG) { Track.Progress.ParsedSquareMatrix(in matrix); }
   }
 }
