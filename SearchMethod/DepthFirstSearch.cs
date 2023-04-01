@@ -1,7 +1,10 @@
 ﻿namespace Search.SearchMethod;
 public static class DepthFirstSearch
 {
+  // Structure require to represent current state in DFS
   private readonly record struct Metadata(int Name, List<int> Path);
+
+  // Wrapper for DFS algorithm
   public static void Run(in double[][] matrix, in int startNode, in int goalNode)
   {
     List<int>? path = Algo(in matrix, in startNode, in goalNode);
@@ -11,15 +14,12 @@ public static class DepthFirstSearch
     Console.WriteLine(header);
     Console.WriteLine(new string('-', header.Length));
 
-    // Handle null type => Implies no path was found
-    if (path is null) { Console.WriteLine("No path was found"); return; }
-
-    // Conversion IF_DEF
-    if (!Program.USE_ALPHABET) { Console.WriteLine(string.Join(" --> ", path)); }
-    List<string> alphabetPath = path.ConvertAll(Convert.NodeName.FromNumberToAlphabet);
-    Console.WriteLine(string.Join(" --> ", alphabetPath));
+    const string separator = " --> ";
+    Print.Path.WithSeparator(in path, separator);
   }
-  public static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
+
+  // DFS Algorithm
+  private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
     // Print parsed matrix | IF_DEF
     if (Program.DEBUG) { Track.Progress.ParsedSquareMatrix(in matrix); }
@@ -39,28 +39,23 @@ public static class DepthFirstSearch
       int nodeName = stack[iLast].Name;
       List<int> nodePath = stack[iLast].Path;
       stack.RemoveAt(iLast);
-
-      // IF_DEF
-      string fNodeName = nodeName.ToString();
-      if (Program.USE_ALPHABET) { fNodeName = Convert.NodeName.FromNumberToAlphabet(nodeName); }
+      Print.Debug.PoppedNode(in nodeName);
 
       // Check if the node already exists in the visited list
       if (visited.Contains(nodeName))
       {
-        // IF_DEF
-        if (!Program.DEBUG) { continue; }
-        Console.WriteLine($"  Node {fNodeName} is already in visited list. Skipping.");
+        Print.Debug.AlreadyVisited(in nodeName);
         continue;
       }
 
       // Otherwise, append the node to the visited list
       visited.Add(nodeName);
-      if (Program.DEBUG) { Console.WriteLine($"Now visiting Node {fNodeName}."); }
+      Print.Debug.NowVisiting(in nodeName);
 
       // Check for goal state
       if (nodeName == goalNode)
       {
-        if (Program.DEBUG) { Console.WriteLine($"  Node {fNodeName} is the goal."); }
+        Print.Debug.GoalReached(in nodeName);
         return nodePath.Append(nodeName).ToList();
       }
 
@@ -69,16 +64,20 @@ public static class DepthFirstSearch
       children.Sort(); children.Reverse(); // Sort and reverse to ensure [C, B, A] like order, A will pop next
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter out visited nodes
 
-      // IF_DEF for empty children set (duplicates or empty)
-
+      // Skip to next item in stack for empty children set (duplicates or empty)
+      if (children.Count == 0)
+      {
+        Print.Debug.NoUniqueChildren(in nodeName);
+        continue;
+      }
 
       // Append the current node to the path => newPath = oldPath + currentNode
       List<int> newPath = new();
       newPath.AddRange(nodePath); newPath.Add(nodeName);
       foreach (int child in children)
       {
+        Print.Debug.AppendedNode(in child);
         stack.Add(new Metadata(child, newPath));
-        if (DebugPrintChildren(in child)) { continue; } // Hook for skipping debug print
       }
 
       Console.WriteLine();
@@ -86,29 +85,5 @@ public static class DepthFirstSearch
 
     // Reaching here implies no path was found
     return null;
-  }
-
-  // IF_DEF Debug Prints //
-  private static bool DebugPrintChildren(in int child)
-  {
-#pragma warning disable CS0162 // Unreachable code detected
-    if (!Program.DEBUG) { return true; }
-#pragma warning restore CS0162 // Unreachable code detected
-
-    string fChildName = child.ToString();
-    if (Program.USE_ALPHABET) { fChildName = Convert.NodeName.FromNumberToAlphabet(child); }
-    Console.WriteLine($"  Appending Node {fChildName} to the stack");
-    return false;
-  }
-
-  private static bool DebugPrintUniqueChildrenCheck(in int nodeName)
-  {
-#pragma warning disable CS0162 // Unreachable code detected
-    if (!Program.DEBUG) { return true; }
-#pragma warning restore CS0162 // Unreachable code detected
-
-    string fNodeName = nodeName.ToString();
-    Console.WriteLine($"  Node {fNodeName} doesn't have unique children.");
-    return false;
   }
 }
