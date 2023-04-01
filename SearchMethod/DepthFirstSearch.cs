@@ -81,7 +81,7 @@ public static class DepthFirstSearch
     }
 
     // Reaching here implies no path was found
-    Print.Debug.StackExhausted();
+    Print.Debug.Exhausted("stack");
     return null;
   }
 }
