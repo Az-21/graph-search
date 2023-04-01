@@ -13,5 +13,8 @@ public static class Handler
 
     // Uninformed Search -> i) Depth first search (DFS)
     SearchMethod.DepthFirstSearch.Run(in matrix, in startNode, in goalNode);
+
+    // Uninformed Search -> ii) Breadth first search (BFS)
+    SearchMethod.BreadthFirstSearch.Run(in matrix, in startNode, in goalNode);
   }
 }
