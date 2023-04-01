@@ -8,7 +8,10 @@ public static class Handler
     int goalNode = searchWith.GoalNode;
     int depthLimit = searchWith.DepthLimit;
 
-    // Depth first search (DFS)
+    // Print parsed matrix | IF_DEF
+    Print.Matrix.FromParsedCsv(in matrix);
+
+    // Uninformed Search -> i) Depth first search (DFS)
     SearchMethod.DepthFirstSearch.Run(in matrix, in startNode, in goalNode);
   }
 }

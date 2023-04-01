@@ -20,9 +20,6 @@ public static class DepthFirstSearch
   // DFS Algorithm
   private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
-    // Print parsed matrix | IF_DEF
-    Print.Matrix.FromParsedCsv(in matrix);
-
     // Initialize a list to keep track of visited nodes
     List<int> visited = new();
 
