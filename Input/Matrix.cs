@@ -22,7 +22,7 @@ public static class Matrix
     return doubles;
   }
 
-  public static double[,] ParseSquareMatrixCsv(in string csv = "graph01.csv")
+  public static double[][] ParseSquareMatrixCsv(in string csv = "graph01.csv")
   {
     // Read CSV as stream of lines
     using StreamReader reader = new(GetCsvPath(csv));
@@ -30,7 +30,7 @@ public static class Matrix
     // Read the first line to get the number of nodes -> create NxN matrix
     string firstLine = reader.ReadLine()!;
     int n = firstLine.Split(',').Length; // Number of nodes
-    double[,] matrix = new double[n, n]; // NxN matrix [T: rectangular array]
+    double[][] matrix = ZerosMatrix(in n);
 
     // Reset the stream reader to head
     ResetStreamReader(reader);
@@ -39,7 +39,7 @@ public static class Matrix
     for (int row = 0; row < n; row++) // `!reader.EndOfStream()` is also fine
     {
       double[] values = ParseCsvAsDouble(reader.ReadLine()!, n);
-      for (int i = 0; i < n; i++) { matrix[row, i] = values[i]; }
+      for (int i = 0; i < n; i++) { matrix[row][i] = values[i]; }
     }
 
     return matrix;
@@ -50,5 +50,17 @@ public static class Matrix
   {
     reader.DiscardBufferedData();
     reader.BaseStream.Seek(0, SeekOrigin.Begin);
+  }
+
+  // Helper function to initialize a zeros square matrix
+  private static double[][] ZerosMatrix(in int size)
+  {
+    // Init Nx_ matrix (length of jagged arrays can vary)
+    double[][] matrix = new double[size][];
+
+    // Init 1xN row and attach it to row[i]
+    for (int i = 0; i < size; i++) { matrix[i] = new double[size]; }
+
+    return matrix;
   }
 }

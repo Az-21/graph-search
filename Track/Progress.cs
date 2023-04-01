@@ -1,7 +1,7 @@
 ﻿namespace Search.Track;
 public static class Progress
 {
-  public static void ParsedSquareMatrix(in double[,] matrix)
+  public static void ParsedSquareMatrix(in double[][] matrix)
   {
     // Get dimension of square matrix
     int n = matrix.GetLength(0);
@@ -16,7 +16,7 @@ public static class Progress
     {
       for (int j = 0; j < n; j++)
       {
-        Console.Write(matrix[i, j].ToString("00.0"));
+        Console.Write(matrix[i][j].ToString("00.0"));
         Console.Write("  ");
       }
       Console.WriteLine("\n");
