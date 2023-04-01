@@ -14,7 +14,7 @@ public static class Program
     double[][] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
 
     // Run search using all search methods
-    SearchWith options = new(StartNode: 0, GoalNode: 7, DepthLimit: 1);
+    SearchWith options = new(StartNode: 0, GoalNode: 6, DepthLimit: 1);
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
   }
 }
