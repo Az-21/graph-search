@@ -70,10 +70,7 @@ public static class DepthFirstSearch
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter out visited nodes
 
       // IF_DEF for empty children set (duplicates or empty)
-      if (Program.DEBUG && children.Count == 0)
-      {
-        Console.WriteLine($"  Node {fNodeName} doesn't have unique children.");
-      }
+
 
       // Append the current node to the path => newPath = oldPath + currentNode
       List<int> newPath = new();
@@ -81,12 +78,7 @@ public static class DepthFirstSearch
       foreach (int child in children)
       {
         stack.Add(new Metadata(child, newPath));
-
-        // IF_DEF
-        if (!Program.DEBUG) { continue; }
-        string fChildName = child.ToString();
-        if (Program.USE_ALPHABET) { fChildName = Convert.NodeName.FromNumberToAlphabet(child); }
-        Console.WriteLine($"  Appending Node {fChildName} to the stack");
+        if (DebugPrintChildren(in child)) { continue; } // Hook for skipping debug print
       }
 
       Console.WriteLine();
@@ -94,5 +86,29 @@ public static class DepthFirstSearch
 
     // Reaching here implies no path was found
     return null;
+  }
+
+  // IF_DEF Debug Prints //
+  private static bool DebugPrintChildren(in int child)
+  {
+#pragma warning disable CS0162 // Unreachable code detected
+    if (!Program.DEBUG) { return true; }
+#pragma warning restore CS0162 // Unreachable code detected
+
+    string fChildName = child.ToString();
+    if (Program.USE_ALPHABET) { fChildName = Convert.NodeName.FromNumberToAlphabet(child); }
+    Console.WriteLine($"  Appending Node {fChildName} to the stack");
+    return false;
+  }
+
+  private static bool DebugPrintUniqueChildrenCheck(in int nodeName)
+  {
+#pragma warning disable CS0162 // Unreachable code detected
+    if (!Program.DEBUG) { return true; }
+#pragma warning restore CS0162 // Unreachable code detected
+
+    string fNodeName = nodeName.ToString();
+    Console.WriteLine($"  Node {fNodeName} doesn't have unique children.");
+    return false;
   }
 }
