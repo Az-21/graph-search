@@ -23,7 +23,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"\t! `Node {fNodeName}` is already in visited list -> Skipping");
+    Console.WriteLine($"\t! `Node {fNodeName}` is already in visited list\n");
   }
 
   // Print message for vising a node which was not found in visited list
