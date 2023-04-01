@@ -6,9 +6,8 @@ public static class Debug
   {
 #pragma warning disable CS0162 // Unreachable code detected
     if (!Program.DEBUG) { return null; }
-#pragma warning restore CS0162 // Unreachable code detected
-
     return Convert.NodeName.ConvertToNumberOrAlphabet(nodeName);
+#pragma warning restore CS0162 // Unreachable code detected
   }
 
   // Print the current node (which was just popped from stack)
@@ -16,7 +15,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"Now visiting Node {fNodeName} from the stack.");
+    Console.WriteLine($"Now visiting `Node {fNodeName}` from the stack");
   }
 
   // Print skipping message -> node is already visited
@@ -24,7 +23,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"  Node {fNodeName} is already in visited list. Skipping.");
+    Console.WriteLine($"\t! `Node {fNodeName}` is already in visited list -> Skipping");
   }
 
   // Print message for vising a node which was not found in visited list
@@ -32,7 +31,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"  Added Node {fNodeName} to the visited list.");
+    Console.WriteLine($"\t> Added `Node {fNodeName}` to the visited list");
   }
 
   // Print goal found message
@@ -40,7 +39,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"  Node {fNodeName} is the goal.");
+    Console.WriteLine($"\t* `Node {fNodeName}` is the goal");
   }
 
   // Print message about node not having any unique/undiscovered children
@@ -48,7 +47,7 @@ public static class Debug
   {
     string? fNodeName = ProcessNodeName(in nodeName);
     if (fNodeName is null) { return; }
-    Console.WriteLine($"  Node {fNodeName} does not have unique children.\n");
+    Console.WriteLine($"\t~ `Node {fNodeName}` does not have unique children\n");
   }
 
   // Print children of node
@@ -56,6 +55,6 @@ public static class Debug
   {
     string? fChildName = ProcessNodeName(in childName);
     if (fChildName is null) { return; }
-    Console.WriteLine($"  Appending Node {fChildName} to the stack");
+    Console.WriteLine($"\t+ Appending `Node {fChildName}` to the stack");
   }
 }
