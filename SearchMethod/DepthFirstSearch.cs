@@ -11,8 +11,7 @@ public static class DepthFirstSearch
 
     // Header
     const string header = "\nDepth First Search Path";
-    Console.WriteLine(header);
-    Console.WriteLine(new string('-', header.Length));
+    Print.Header.WithUnderline(header);
 
     const string separator = " --> ";
     Print.Path.WithSeparator(in path, separator);

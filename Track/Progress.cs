@@ -8,8 +8,7 @@ public static class Progress
 
     // Header
     string header = $"Parsed CSV as a(n) {n}x{n} matrix";
-    string underline = new('-', header.Length);
-    Console.WriteLine($"{header}\n{underline}\n");
+    Print.Header.WithUnderline(header);
 
     // NxN matrix
     for (int i = 0; i < n; i++)
