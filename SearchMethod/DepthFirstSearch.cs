@@ -21,7 +21,7 @@ public static class DepthFirstSearch
   private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
     // Print parsed matrix | IF_DEF
-    if (Program.DEBUG) { Track.Progress.ParsedSquareMatrix(in matrix); }
+    Track.Progress.ParsedSquareMatrix(in matrix);
 
     // Initialize a list to keep track of visited nodes
     List<int> visited = new();
@@ -78,8 +78,9 @@ public static class DepthFirstSearch
         Print.Debug.AppendedNode(in child);
         stack.Add(new Metadata(child, newPath));
       }
-
-      Console.WriteLine();
+#pragma warning disable CS0162 // Unreachable code detected
+      if (Program.DEBUG) { Console.WriteLine(); }
+#pragma warning restore CS0162 // Unreachable code detected
     }
 
     // Reaching here implies no path was found

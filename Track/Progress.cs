@@ -1,8 +1,11 @@
 ﻿namespace Search.Track;
 public static class Progress
 {
+#pragma warning disable CS0162 // Unreachable code detected
   public static void ParsedSquareMatrix(in double[][] matrix)
   {
+    if (!Program.DEBUG) { return; }
+
     // Get dimension of square matrix
     int n = matrix.GetLength(0);
 
@@ -21,4 +24,5 @@ public static class Progress
       Console.WriteLine("\n");
     }
   }
+#pragma warning restore CS0162 // Unreachable code detected
 }

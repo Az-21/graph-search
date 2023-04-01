@@ -6,17 +6,16 @@ public static class NodeName
   {
 #pragma warning disable CS0162 // Unreachable code detected
     if (!Program.USE_ALPHABET) { return number.ToString(); }
-#pragma warning restore CS0162 // Unreachable code detected
-
     return FromNumberToAlphabet(number);
+#pragma warning restore CS0162 // Unreachable code detected
   }
 
   public static List<string> ConvertListToNumberOrAlphabet(in List<int> list)
   {
 #pragma warning disable CS0162 // Unreachable code detected
     if (!Program.USE_ALPHABET) { return list.ConvertAll(x => x.ToString()); }
-#pragma warning restore CS0162 // Unreachable code detected
     return list.ConvertAll(Convert.NodeName.FromNumberToAlphabet);
+#pragma warning restore CS0162 // Unreachable code detected
   }
   private static string FromNumberToAlphabet(int number)
   {
