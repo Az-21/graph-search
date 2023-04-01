@@ -66,8 +66,8 @@ public static partial class Debug
   // Simple IF_DEF wrapper (to ignore unreachable code warning)
   private static bool IfDefWrapper() => Program.DEBUG;
 
-  public static void StackExhausted()
+  public static void Exhausted(in string ladder)
   {
-    if (IfDefWrapper()) { Console.WriteLine("Exhausted stack. Terminating search."); }
+    if (IfDefWrapper()) { Console.WriteLine($"Exhausted {ladder}. Terminating search."); }
   }
 }
