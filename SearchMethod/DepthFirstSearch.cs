@@ -21,7 +21,7 @@ public static class DepthFirstSearch
   private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
     // Print parsed matrix | IF_DEF
-    Track.Progress.ParsedSquareMatrix(in matrix);
+    Print.Matrix.FromParsedCsv(in matrix);
 
     // Initialize a list to keep track of visited nodes
     List<int> visited = new();

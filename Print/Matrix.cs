@@ -1,8 +1,8 @@
-﻿namespace Search.Track;
-public static class Progress
+﻿namespace Search.Print;
+public static class Matrix
 {
 #pragma warning disable CS0162 // Unreachable code detected
-  public static void ParsedSquareMatrix(in double[][] matrix)
+  public static void FromParsedCsv(in double[][] matrix)
   {
     if (!Program.DEBUG) { return; }
 
