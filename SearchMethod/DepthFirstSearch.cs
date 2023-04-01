@@ -7,13 +7,13 @@ public static class DepthFirstSearch
   {
     List<int>? path = Algo(in matrix, in startNode, in goalNode);
 
-    // Handle null type => Implies no path was found
-    if (path is null) { Console.WriteLine("No path was found"); return; }
-
-    // Otherwise, print the path received
-    const string header = "Depth First Search Path";
+    // Header
+    const string header = "\nDepth First Search Path";
     Console.WriteLine(header);
     Console.WriteLine(new string('-', header.Length));
+
+    // Handle null type => Implies no path was found
+    if (path is null) { Console.WriteLine("No path was found"); return; }
 
     // Conversion IF_DEF
     if (!Program.USE_ALPHABET) { Console.WriteLine(string.Join(" --> ", path)); }
@@ -61,7 +61,7 @@ public static class DepthFirstSearch
       // Check for goal state
       if (nodeName == goalNode)
       {
-        if (Program.DEBUG) { Console.WriteLine($"  Node {fNodeName} is the goal.\n"); }
+        if (Program.DEBUG) { Console.WriteLine($"  Node {fNodeName} is the goal."); }
         return nodePath.Append(nodeName).ToList();
       }
 
