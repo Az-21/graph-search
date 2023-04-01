@@ -1,8 +1,7 @@
 ﻿namespace Search.SearchMethod;
-internal readonly record struct NodeMetadata(int Name, List<int> Path);
-
 public static class DepthFirstSearch
 {
+  private readonly record struct Metadata(int Name, List<int> Path);
   public static void Run(in double[][] matrix, in int startNode, in int goalNode)
   {
     List<int>? path = Algo(in matrix, in startNode, in goalNode);
@@ -29,8 +28,8 @@ public static class DepthFirstSearch
     List<int> visited = new();
 
     // Initialize last come first serve stack -> Initialize with starting condition
-    NodeMetadata start = new(startNode, new List<int>());
-    List<NodeMetadata> stack = new() { start };
+    Metadata start = new(startNode, new List<int>());
+    List<Metadata> stack = new() { start };
 
     // Recursively iterate over stack
     while (stack.Count > 0)
@@ -81,7 +80,7 @@ public static class DepthFirstSearch
       newPath.AddRange(nodePath); newPath.Add(nodeName);
       foreach (int child in children)
       {
-        stack.Add(new NodeMetadata(child, newPath));
+        stack.Add(new Metadata(child, newPath));
 
         // IF_DEF
         if (!Program.DEBUG) { continue; }
