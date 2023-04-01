@@ -21,7 +21,7 @@ public static class BreadthFirstSearch
   private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
     // Initialize a list to keep track of visited nodes
-    List<int> visited = new();
+    HashSet<int> visited = new();
 
     // Initialize first come first serve queue -> Initialize with starting condition
     Metadata start = new(startNode, new List<int>());

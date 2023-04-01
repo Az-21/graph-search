@@ -21,7 +21,7 @@ public static class DepthFirstSearch
   private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
   {
     // Initialize a list to keep track of visited nodes
-    List<int> visited = new();
+    HashSet<int> visited = new();
 
     // Initialize last come first serve stack -> Initialize with starting condition
     Metadata start = new(startNode, new List<int>());
