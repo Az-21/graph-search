@@ -1,5 +1,5 @@
 ﻿namespace Search.Print;
-public static class Debug
+public static partial class Debug
 {
   // Primary debug wrapper
   private static string? ProcessNodeName(in int nodeName)
@@ -56,5 +56,18 @@ public static class Debug
     string? fChildName = ProcessNodeName(in childName);
     if (fChildName is null) { return; }
     Console.WriteLine($"\t+ Appending `Node {fChildName}` to the stack");
+  }
+}
+
+// Stack related messages
+public static partial class Debug
+{
+
+  // Simple IF_DEF wrapper (to ignore unreachable code warning)
+  private static bool IfDefWrapper() => Program.DEBUG;
+
+  public static void StackExhausted()
+  {
+    if (IfDefWrapper()) { Console.WriteLine("Exhausted stack. Terminating search."); }
   }
 }
