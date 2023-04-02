@@ -1,73 +1,55 @@
 ﻿namespace Search.Print;
-public static partial class Debug
+
+public enum About
 {
-  // Primary debug wrapper
-  private static string? ProcessNodeName(in int nodeName)
-  {
-#pragma warning disable CS0162 // Unreachable code detected
-    if (!Program.DEBUG) { return null; }
-    return Convert.NodeName.ConvertToNumberOrAlphabet(nodeName);
-#pragma warning restore CS0162 // Unreachable code detected
-  }
+  Appended,
+  Exhausted,
+  PoppedNode,
+  GoalReached,
+  NoUniqueChild,
+  AddedToVisited,
+  AlreadyVisited,
+};
 
-  // Print the current node (which was just popped from stack)
-  public static void PoppedNode(in int nodeName)
-  {
-    string? fNodeName = ProcessNodeName(in nodeName);
-    if (fNodeName is null) { return; }
-    Console.WriteLine($"Now visiting `Node {fNodeName}` from the stack");
-  }
-
-  // Print skipping message -> node is already visited
-  public static void AlreadyVisited(in int nodeName)
-  {
-    string? fNodeName = ProcessNodeName(in nodeName);
-    if (fNodeName is null) { return; }
-    Console.WriteLine($"\t! `Node {fNodeName}` is already in visited list\n");
-  }
-
-  // Print message for vising a node which was not found in visited list
-  public static void NowVisiting(in int nodeName)
-  {
-    string? fNodeName = ProcessNodeName(in nodeName);
-    if (fNodeName is null) { return; }
-    Console.WriteLine($"\t> Added `Node {fNodeName}` to the visited list");
-  }
-
-  // Print goal found message
-  public static void GoalReached(in int nodeName)
-  {
-    string? fNodeName = ProcessNodeName(in nodeName);
-    if (fNodeName is null) { return; }
-    Console.WriteLine($"\t* `Node {fNodeName}` is the goal");
-  }
-
-  // Print message about node not having any unique/undiscovered children
-  public static void NoUniqueChildren(in int nodeName)
-  {
-    string? fNodeName = ProcessNodeName(in nodeName);
-    if (fNodeName is null) { return; }
-    Console.WriteLine($"\t~ `Node {fNodeName}` does not have unique children\n");
-  }
-
-  // Print children of node
-  public static void AppendedNode(in int childName)
-  {
-    string? fChildName = ProcessNodeName(in childName);
-    if (fChildName is null) { return; }
-    Console.WriteLine($"\t+ Appending `Node {fChildName}` to the stack");
-  }
-}
-
-// Stack related messages
-public static partial class Debug
+public static class Debug
 {
-
-  // Simple IF_DEF wrapper (to ignore unreachable code warning)
-  private static bool IfDefWrapper() => Program.DEBUG;
-
-  public static void Exhausted(in string ladder)
+  // Debug messages which need the current `node` to print a message
+  public static void Message(in int node, in About message)
   {
-    if (IfDefWrapper()) { Console.WriteLine($"Exhausted {ladder}. Terminating search."); }
+    if (!Input.Read.DebugFlag()) { return; }
+    string id = Convert.NodeName.ConvertToNumberOrAlphabet(node);
+
+    switch (message)
+    {
+      case Print.About.Appended:
+        Console.WriteLine($"\t+ Appending `Node {id}` to the stack"); break;
+
+      case Print.About.GoalReached:
+        Console.WriteLine($"\t* `Node {id}` is the goal"); break;
+
+      case Print.About.PoppedNode:
+        Console.WriteLine($"Popped `Node {id}` from the stack/queue"); break;
+
+      case Print.About.AlreadyVisited:
+        Console.WriteLine($"\t! `Node {id}` is already in visited list\n"); break;
+
+      case Print.About.AddedToVisited:
+        Console.WriteLine($"\t> Added `Node {id}` to the visited list"); break;
+
+      case Print.About.NoUniqueChild:
+        Console.WriteLine($"\t~ `Node {id}` does not have unique children\n"); break;
+    }
+  }
+
+  // Debug messages which don't need the current `node` to print a message
+  public static void Message(in About message)
+  {
+    if (!Input.Read.DebugFlag()) { return; }
+
+    switch (message)
+    {
+      case Print.About.Exhausted:
+        Console.WriteLine("Exhausted stack/queue. Terminating search."); break;
+    }
   }
 }
