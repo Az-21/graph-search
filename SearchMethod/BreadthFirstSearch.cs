@@ -31,56 +31,55 @@ public static class BreadthFirstSearch
     while (queue.Count > 0)
     {
       // Capture and pop first element in queue
-      int nodeName = queue.Peek().Name; // queue[0].Name
+      int node = queue.Peek().Name; // queue[0].Name
       List<int> nodePath = queue.Peek().Path; // queue[0].Path
       queue.Dequeue();
-      Print.Debug.PoppedNode(in nodeName);
+      Print.Debug.Message(in node, Print.About.PoppedNode);
 
       // Check if the node already exists in the visited list
-      if (visited.Contains(nodeName))
+      if (visited.Contains(node))
       {
-        Print.Debug.AlreadyVisited(in nodeName);
+        Print.Debug.Message(in node, Print.About.AlreadyVisited);
         continue;
       }
 
       // Otherwise, append the node to the visited list
-      visited.Add(nodeName);
-      Print.Debug.NowVisiting(in nodeName);
+      visited.Add(node);
+      Print.Debug.Message(in node, Print.About.AddedToVisited);
 
       // Check for goal state
-      if (nodeName == goalNode)
+      if (node == goalNode)
       {
-        Print.Debug.GoalReached(in nodeName);
-        return nodePath.Append(nodeName).ToList();
+        Print.Debug.Message(in node, Print.About.GoalReached);
+        return nodePath.Append(node).ToList();
       }
 
       // Otherwise append the children of current node to the queue
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in nodeName);
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node);
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter visited nodes
       children.Sort(); // Sort to ensure [A, B, C] like order, A will eventually pop first
 
       // Skip to next item in queue for empty children set (duplicates or empty)
       if (children.Count == 0)
       {
-        Print.Debug.NoUniqueChildren(in nodeName);
+        Print.Debug.Message(in node, Print.About.NoUniqueChild);
         continue;
       }
 
       // Append the current node to the path => newPath = oldPath + currentNode
       List<int> newPath = new();
-      newPath.AddRange(nodePath); newPath.Add(nodeName);
+      newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
-        Print.Debug.AppendedNode(in child);
+        Print.Debug.Message(in child, Print.About.Appended);
         queue.Enqueue(new Metadata(child, newPath));
       }
-#pragma warning disable CS0162 // Unreachable code detected
-      if (Program.DEBUG) { Console.WriteLine(); }
-#pragma warning restore CS0162 // Unreachable code detected
+
+      if (Input.Read.DebugFlag()) { Console.WriteLine(); }
     }
 
     // Reaching here implies no path was found
-    Print.Debug.Exhausted("queue");
+    Print.Debug.Message(Print.About.Exhausted);
     return null;
   }
 }

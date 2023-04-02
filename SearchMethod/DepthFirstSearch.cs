@@ -32,56 +32,55 @@ public static class DepthFirstSearch
     {
       // Capture and pop last
       int iLast = stack.Count - 1;
-      int nodeName = stack[iLast].Name;
+      int node = stack[iLast].Name;
       List<int> nodePath = stack[iLast].Path;
       stack.RemoveAt(iLast);
-      Print.Debug.PoppedNode(in nodeName);
+      Print.Debug.Message(in node, Print.About.PoppedNode);
 
       // Check if the node already exists in the visited list
-      if (visited.Contains(nodeName))
+      if (visited.Contains(node))
       {
-        Print.Debug.AlreadyVisited(in nodeName);
+        Print.Debug.Message(in node, Print.About.AlreadyVisited);
         continue;
       }
 
       // Otherwise, append the node to the visited list
-      visited.Add(nodeName);
-      Print.Debug.NowVisiting(in nodeName);
+      visited.Add(node);
+      Print.Debug.Message(in node, Print.About.AddedToVisited);
 
       // Check for goal state
-      if (nodeName == goalNode)
+      if (node == goalNode)
       {
-        Print.Debug.GoalReached(in nodeName);
-        return nodePath.Append(nodeName).ToList();
+        Print.Debug.Message(in node, Print.About.GoalReached);
+        return nodePath.Append(node).ToList();
       }
 
       // Otherwise append the children of current node to the stack
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in nodeName);
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node);
       children.Sort(); children.Reverse(); // Sort and reverse to ensure [C, B, A] like order, A will pop next
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter out visited nodes
 
       // Skip to next item in stack for empty children set (duplicates or empty)
       if (children.Count == 0)
       {
-        Print.Debug.NoUniqueChildren(in nodeName);
+        Print.Debug.Message(in node, Print.About.NoUniqueChild);
         continue;
       }
 
       // Append the current node to the path => newPath = oldPath + currentNode
       List<int> newPath = new();
-      newPath.AddRange(nodePath); newPath.Add(nodeName);
+      newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
-        Print.Debug.AppendedNode(in child);
+        Print.Debug.Message(in child, Print.About.Appended);
         stack.Add(new Metadata(child, newPath));
       }
-#pragma warning disable CS0162 // Unreachable code detected
-      if (Program.DEBUG) { Console.WriteLine(); }
-#pragma warning restore CS0162 // Unreachable code detected
+
+      if (Input.Read.DebugFlag()) { Console.WriteLine(); }
     }
 
     // Reaching here implies no path was found
-    Print.Debug.Exhausted("stack");
+    Print.Debug.Message(Print.About.Exhausted);
     return null;
   }
 }
