@@ -5,9 +5,9 @@ public static class BreadthFirstSearch
   private readonly record struct Metadata(int Name, List<int> Path);
 
   // Wrapper for BFS algorithm
-  public static void Run(in double[][] matrix, in int startNode, in int goalNode)
+  public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = Algo(in matrix, in startNode, in goalNode);
+    List<int>? path = Algo(in matrix, in config);
 
     // Header
     const string header = "\nBreadth First Search Path";
@@ -18,8 +18,12 @@ public static class BreadthFirstSearch
   }
 
   // BFS Algorithm
-  private static List<int>? Algo(in double[][] matrix, in int startNode, in int goalNode)
+  private static List<int>? Algo(in double[][] matrix, in Program.SearchWith config)
   {
+    // Unpack search options
+    int startNode = config.StartNode;
+    int goalNode = config.GoalNode;
+
     // Initialize a list to keep track of visited nodes
     HashSet<int> visited = new();
 
