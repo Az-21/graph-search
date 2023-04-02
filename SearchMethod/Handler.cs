@@ -20,11 +20,16 @@ public static class Handler
     Spacer();
     Print.Header.WithUnderline("Uninformed Search -> iii) Depth limited search (DLS)");
     DepthLimitedSearch.Run(in matrix, in searchWith);
+
+    // ID-DFS
+    Spacer();
+    Print.Header.WithUnderline("Uninformed Search -> iv) Iterative deepening search (ID-DFS)");
+    IterativeDeepeningSearch.Run(in matrix, in searchWith);
   }
 
   private static void Spacer()
   {
-    string divider = new('/', 80);
+    string divider = new('>', 80);
     Console.WriteLine($"\n\n{divider}\n{divider}\n\n");
   }
 }
