@@ -7,7 +7,7 @@ public static class DepthLimitedSearch
   // Wrapper for DLS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = Algo(in matrix, in config);
+    List<int>? path = AlgoDLS(in matrix, in config);
 
     // Header
     const string header = "\nDepth Limited Search Path";
@@ -18,7 +18,7 @@ public static class DepthLimitedSearch
   }
 
   // DLS Algorithm
-  private static List<int>? Algo(in double[][] matrix, in Program.SearchWith config)
+  public static List<int>? AlgoDLS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
     int startNode = config.StartNode;
