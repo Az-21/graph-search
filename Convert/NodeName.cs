@@ -4,19 +4,16 @@ public static class NodeName
   // Base10 to Base26 | 0->A, 1->B, 25->Z, 26->AA
   public static string ConvertToNumberOrAlphabet(in int number)
   {
-#pragma warning disable CS0162 // Unreachable code detected
-    if (!Program.USE_ALPHABET) { return number.ToString(); }
+    if (!Input.Read.AlphabetFlag()) { return number.ToString(); }
     return FromNumberToAlphabet(number);
-#pragma warning restore CS0162 // Unreachable code detected
   }
 
   public static List<string> ConvertListToNumberOrAlphabet(in List<int> list)
   {
-#pragma warning disable CS0162 // Unreachable code detected
-    if (!Program.USE_ALPHABET) { return list.ConvertAll(x => x.ToString()); }
+    if (!Input.Read.AlphabetFlag()) { return list.ConvertAll(x => x.ToString()); }
     return list.ConvertAll(Convert.NodeName.FromNumberToAlphabet);
-#pragma warning restore CS0162 // Unreachable code detected
   }
+
   private static string FromNumberToAlphabet(int number)
   {
     string result = string.Empty;
