@@ -9,12 +9,13 @@ public enum About
   NoUniqueChild,
   AddedToVisited,
   AlreadyVisited,
+  ReachedDepthLimit,
 };
 
 public static class Debug
 {
-  // Debug messages which need the current `node` to print a message
-  public static void Message(in int node, in About message)
+  // Debug messages which need the current `node` (and optionally depth) to print a message
+  public static void Message(in int node, in About message, in int depth = 0)
   {
     if (!Input.Read.DebugFlag()) { return; }
     string id = Convert.NodeName.ConvertToNumberOrAlphabet(node);
@@ -22,7 +23,7 @@ public static class Debug
     switch (message)
     {
       case Print.About.Appended:
-        Console.WriteLine($"\t+ Appending `Node {id}` to the stack"); break;
+        Console.WriteLine($"\t+ Appending `Node {id}` to the stack/queue"); break;
 
       case Print.About.GoalReached:
         Console.WriteLine($"\t* `Node {id}` is the goal"); break;
@@ -38,6 +39,10 @@ public static class Debug
 
       case Print.About.NoUniqueChild:
         Console.WriteLine($"\t~ `Node {id}` does not have unique children\n"); break;
+
+      case Print.About.ReachedDepthLimit:
+        Console.WriteLine($"\tx `Node {id}` is at depth limit [d={depth}] -> not expanding further\n");
+        break;
     }
   }
 
