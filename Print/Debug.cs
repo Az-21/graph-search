@@ -14,6 +14,7 @@ public enum About
   AlreadyInOpenList,
   ReachedDepthLimit,
   PoppedNodeWithMinCuCost,
+  FoundNodeWithLowerCuCost,
   CostHigherThanCurrentBest,
 };
 
@@ -63,17 +64,19 @@ public static class Debug
     switch (message)
     {
       case Print.About.AppendedWithCost:
-        Console.WriteLine($"\t+ Appended `Node {id}` with cumulative cost of {cost}");
-        Console.WriteLine($"\t  Previous best was {best}");
+        Console.WriteLine($"\t+ Appended `Node {id}` with cumulative cost of {cost} (previous best was {best})");
         break;
 
       case Print.About.CostHigherThanCurrentBest:
-        Console.WriteLine($"\tx Not appending `Node {id}` with cumulative cost of {cost}");
-        Console.WriteLine($"\t  Current best is {best}");
+        Console.WriteLine($"\tx Not appending `Node {id}` with cumulative cost of {cost} because current best is {best}");
         break;
 
       case Print.About.PoppedNodeWithMinCuCost:
-        Console.WriteLine($"Popped `Node {id}` from the stack/queue because it has lowest cumulative sum of {cost}");
+        Console.WriteLine($"Popped `Node {id}` from the stack/queue because it has lowest cumulative cost of {cost}");
+        break;
+
+      case Print.About.FoundNodeWithLowerCuCost:
+        Console.WriteLine($"\t> `Node {id}` with cost of {cost} is a dead end because another path with cost of {best} was found");
         break;
     }
   }
@@ -124,7 +127,7 @@ public static class Debug
     foreach (KeyValuePair<int, double> item in kvp)
     {
       string node = Convert.NodeName.ConvertToNumberOrAlphabet(item.Key);
-      Console.WriteLine($"{node}: {item.Value}");
+      Console.Write($"{node}: {item.Value}; ");
     }
     Console.WriteLine();
   }

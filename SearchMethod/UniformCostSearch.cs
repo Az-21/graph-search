@@ -47,6 +47,13 @@ public static class UniformCostSearch
       stack.RemoveAt(0);
       Print.Debug.Message(in node, Print.About.PoppedNodeWithMinCuCost, cumulativeCost);
 
+      // Handle a special case when a newer cumulative cost is found **after** a node has been pushed to stack
+      if (cumulativeCost > leastCost[node])
+      {
+        Print.Debug.Message(in node, Print.About.FoundNodeWithLowerCuCost, in cumulativeCost, leastCost[node]);
+        continue;
+      }
+
       // Check for goal state
       if (node == goalNode)
       {
