@@ -25,6 +25,11 @@ public static class Handler
     Spacer();
     Print.Header.WithUnderline("Uninformed Search -> iv) Iterative deepening search (ID-DFS)");
     IterativeDeepeningSearch.Run(in matrix, in searchWith);
+
+    // UCS
+    Spacer();
+    Print.Header.WithUnderline("Uninformed Search -> v) Uniform Cost Search (UCS)");
+    UniformCostSearch.Run(in matrix, in searchWith);
   }
 
   private static void Spacer()
