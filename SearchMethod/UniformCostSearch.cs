@@ -61,6 +61,9 @@ public static class UniformCostSearch
         continue;
       }
 
+      // Otherwise, print the list of connected nodes (children)
+      Print.Debug.Message(in node, in children, Print.About.ListOfChildren);
+
       // Append the current node to the path => newPath = oldPath + currentNode
       List<int> newPath = new();
       newPath.AddRange(nodePath); newPath.Add(node);
