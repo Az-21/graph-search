@@ -7,13 +7,13 @@ public static class BreadthFirstSearch
   // Wrapper for BFS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = Algo(in matrix, in config);
+    List<int>? path = FindPathByBFS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.BFS);
     Print.Path.WithSeparator(in path);
   }
 
   // BFS Algorithm
-  private static List<int>? Algo(in double[][] matrix, in Program.SearchWith config)
+  private static List<int>? FindPathByBFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
     int startNode = config.StartNode;

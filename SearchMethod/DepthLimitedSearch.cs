@@ -7,13 +7,13 @@ public static class DepthLimitedSearch
   // Wrapper for DLS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = AlgoDLS(in matrix, in config);
+    List<int>? path = FindPathByDLS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.DLS);
     Print.Path.WithSeparator(in path);
   }
 
   // DLS Algorithm
-  public static List<int>? AlgoDLS(in double[][] matrix, in Program.SearchWith config)
+  public static List<int>? FindPathByDLS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
     int startNode = config.StartNode;

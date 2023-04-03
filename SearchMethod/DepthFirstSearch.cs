@@ -7,13 +7,13 @@ public static class DepthFirstSearch
   // Wrapper for DFS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = Algo(in matrix, in config);
+    List<int>? path = FindPathByDFS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.DFS);
     Print.Path.WithSeparator(in path);
   }
 
   // DFS Algorithm
-  private static List<int>? Algo(in double[][] matrix, in Program.SearchWith config)
+  private static List<int>? FindPathByDFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
     int startNode = config.StartNode;

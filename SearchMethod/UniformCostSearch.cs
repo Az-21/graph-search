@@ -7,13 +7,13 @@ public static class UniformCostSearch
   // Wrapper for UCS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    List<int>? path = Algo(in matrix, in config);
+    List<int>? path = FindPathByUCS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.UCS);
     Print.Path.WithSeparator(in path);
   }
 
   // UCS Algorithm
-  private static List<int>? Algo(in double[][] matrix, in Program.SearchWith config)
+  private static List<int>? FindPathByUCS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
     int startNode = config.StartNode;
