@@ -14,6 +14,11 @@ public static class NodeName
     return list.ConvertAll(Convert.NodeName.FromNumberToAlphabet);
   }
 
+  public static List<string> ConvertListToNumberOrAlphabet(in HashSet<int> list)
+  {
+    return list.Select(Convert.NodeName.FromNumberToAlphabet).ToList();
+  }
+
   private static string FromNumberToAlphabet(int number)
   {
     string result = string.Empty;
