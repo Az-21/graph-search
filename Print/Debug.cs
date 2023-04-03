@@ -9,6 +9,7 @@ public enum About
   NoUniqueChild,
   AddedToVisited,
   AlreadyVisited,
+  ListOfChildren,
   AppendedWithCost,
   AlreadyInOpenList,
   ReachedDepthLimit,
@@ -73,6 +74,21 @@ public static class Debug
 
       case Print.About.PoppedNodeWithMinCuCost:
         Console.WriteLine($"Popped `Node {id}` from the stack/queue because it has lowest cumulative sum of {cost}");
+        break;
+    }
+  }
+
+  // Debug messages which describe neighbors of a node
+  public static void Message(in int parent, in List<int> children, in About message)
+  {
+    if (!Input.Read.DebugFlag()) { return; }
+    string fParent = Convert.NodeName.ConvertToNumberOrAlphabet(parent);
+    List<string> fChildren = Convert.NodeName.ConvertListToNumberOrAlphabet(children);
+
+    switch (message)
+    {
+      case Print.About.ListOfChildren:
+        Console.WriteLine($"\t> `Node {fParent}` has {fChildren.Count} children: {{ {string.Join(", ", fChildren)} }}");
         break;
     }
   }
