@@ -24,8 +24,9 @@ public static class BreadthFirstSearch
     int startNode = config.StartNode;
     int goalNode = config.GoalNode;
 
-    // Initialize a list to keep track of visited nodes
+    // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
+    HashSet<int> open = new() { startNode };
 
     // Initialize first come first serve queue -> Initialize with starting condition
     Metadata start = new(startNode, new List<int>());
@@ -34,6 +35,9 @@ public static class BreadthFirstSearch
     // Recursively iterate over queue
     while (queue.Count > 0)
     {
+      // Print open list and closed list | IF_DEF
+      Print.Debug.OpenAndVisitedList(in open, in visited);
+
       // Capture and pop first element in queue
       int node = queue.Peek().Name; // queue[0].Name
       List<int> nodePath = queue.Peek().Path; // queue[0].Path
@@ -47,7 +51,8 @@ public static class BreadthFirstSearch
         continue;
       }
 
-      // Otherwise, append the node to the visited list
+      // Otherwise, append the node to the visited list and remove from open list
+      open.Remove(node);
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);
 
@@ -75,6 +80,15 @@ public static class BreadthFirstSearch
       newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
+        // Check if the child already exists in open list
+        if (open.Contains(child))
+        {
+          Print.Debug.Message(in child, Print.About.AlreadyInOpenList);
+          continue;
+        }
+
+        // Enqueue if the child is not present in open list
+        open.Add(child);
         Print.Debug.Message(in child, Print.About.Appended);
         queue.Enqueue(new Metadata(child, newPath));
       }
