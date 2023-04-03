@@ -13,8 +13,7 @@ public static class DepthLimitedSearch
     const string header = "\nDepth Limited Search Path";
     Print.Header.WithUnderline(header);
 
-    const string separator = " --> ";
-    Print.Path.WithSeparator(in path, separator);
+    Print.Path.WithSeparator(in path);
   }
 
   // DLS Algorithm

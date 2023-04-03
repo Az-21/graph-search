@@ -13,8 +13,7 @@ public static class UniformCostSearch
     const string header = "\nUniform Cost Search Path";
     Print.Header.WithUnderline(header);
 
-    const string separator = " --> ";
-    Print.Path.WithSeparator(in path, separator);
+    Print.Path.WithSeparator(in path);
   }
 
   // UCS Algorithm

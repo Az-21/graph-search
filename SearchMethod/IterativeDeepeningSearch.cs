@@ -5,7 +5,6 @@ public static class IterativeDeepeningSearch
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
     const string header = "\nIterative Deepening Search Path";
-    const string separator = " --> ";
 
     // Increment depth while no path is found
     int depth = 0;
@@ -34,7 +33,7 @@ public static class IterativeDeepeningSearch
       // Otherwise, print the path
       Console.WriteLine($"\nID-DFS found the goal at depth limit of [d={depth}]");
       Print.Header.WithUnderline(header);
-      Print.Path.WithSeparator(in path, separator);
+      Print.Path.WithSeparator(in path);
       return;
     }
   }

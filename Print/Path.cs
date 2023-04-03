@@ -1,7 +1,9 @@
 ﻿namespace Search.Print;
 public static class Path
 {
-  public static void WithSeparator(in List<int>? path, in string separator)
+  private const string separator = " --> ";
+
+  public static void WithSeparator(in List<int>? path)
   {
     // Handle null type => Implies no path was found
     if (path is null) { Console.WriteLine("No path was found"); return; }

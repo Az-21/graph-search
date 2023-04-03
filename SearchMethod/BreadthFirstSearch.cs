@@ -13,8 +13,7 @@ public static class BreadthFirstSearch
     const string header = "\nBreadth First Search Path";
     Print.Header.WithUnderline(header);
 
-    const string separator = " --> ";
-    Print.Path.WithSeparator(in path, separator);
+    Print.Path.WithSeparator(in path);
   }
 
   // BFS Algorithm

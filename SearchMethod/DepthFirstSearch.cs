@@ -13,8 +13,7 @@ public static class DepthFirstSearch
     const string header = "\nDepth First Search Path";
     Print.Header.WithUnderline(header);
 
-    const string separator = " --> ";
-    Print.Path.WithSeparator(in path, separator);
+    Print.Path.WithSeparator(in path);
   }
 
   // DFS Algorithm
