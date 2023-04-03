@@ -36,6 +36,9 @@ public static class UniformCostSearch
     // Recursively iterate over stack
     while (stack.Count > 0)
     {
+      // Print the KVP of node and best cumulative distance
+      Print.Debug.CurrentBestCumulative(in leastCost);
+
       // Pop the node with lowest cumulative cost
       stack = stack.OrderBy(x => x.CumulativeCost).ToList(); // Ensures stack[0] has lowest CC
       int node = stack[0].Name;

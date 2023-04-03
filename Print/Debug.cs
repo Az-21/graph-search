@@ -114,4 +114,18 @@ public static class Debug
     Console.WriteLine($"Closed list: {{ {string.Join(", ", fVisited)} }}");
     Console.WriteLine($"Open list: {{ {string.Join(", ", fOpen)} }}");
   }
+
+  // Debug messages about the heuristic values and current best estimations
+  public static void CurrentBestCumulative(in Dictionary<int, double> kvp)
+  {
+    if (!Input.Read.DebugFlag()) { return; }
+
+    Console.WriteLine("\nCurrent best cumulative cost of each node");
+    foreach (KeyValuePair<int, double> item in kvp)
+    {
+      string node = Convert.NodeName.ConvertToNumberOrAlphabet(item.Key);
+      Console.WriteLine($"{node}: {item.Value}");
+    }
+    Console.WriteLine();
+  }
 }
