@@ -7,34 +7,23 @@ public static class Handler
     Print.Matrix.FromParsedCsv(in matrix);
 
     // DFS
-    Spacer();
-    Print.Header.WithUnderline("Uninformed Search -> i) Depth first search (DFS)");
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DLS, false);
     DepthFirstSearch.Run(in matrix, in searchWith);
 
     // BFS
-    Spacer();
-    Print.Header.WithUnderline("Uninformed Search -> ii) Breadth first search (BFS)");
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.BFS, false);
     BreadthFirstSearch.Run(in matrix, in searchWith);
 
     // DLS
-    Spacer();
-    Print.Header.WithUnderline("Uninformed Search -> iii) Depth limited search (DLS)");
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DLS, false);
     DepthLimitedSearch.Run(in matrix, in searchWith);
 
-    // ID-DFS
-    Spacer();
-    Print.Header.WithUnderline("Uninformed Search -> iv) Iterative deepening search (ID-DFS)");
+    // ID-DFS (IDLS)
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.IDLS, false);
     IterativeDeepeningSearch.Run(in matrix, in searchWith);
 
     // UCS
-    Spacer();
-    Print.Header.WithUnderline("Uninformed Search -> v) Uniform Cost Search (UCS)");
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.UCS, false);
     UniformCostSearch.Run(in matrix, in searchWith);
-  }
-
-  private static void Spacer()
-  {
-    string divider = new('>', 80);
-    Console.WriteLine($"\n\n{divider}\n{divider}\n\n");
   }
 }

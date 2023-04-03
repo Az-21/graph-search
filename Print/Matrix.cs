@@ -10,7 +10,7 @@ public static class Matrix
 
     // Header
     string header = $"Parsed CSV as a(n) {n}x{n} matrix";
-    Print.Header.WithUnderline(header);
+    Print.Header.CustomMessageWithUnderline(header);
 
     // NxN matrix
     for (int i = 0; i < n; i++)

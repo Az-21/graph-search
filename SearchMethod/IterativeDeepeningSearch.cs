@@ -4,8 +4,6 @@ public static class IterativeDeepeningSearch
   // Wrapper for DLS algorithm
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
-    const string header = "\nIterative Deepening Search Path";
-
     // Increment depth while no path is found
     int depth = 0;
     const int maxDepth = 10; // Failsafe for no path found in reasonable time
@@ -32,7 +30,7 @@ public static class IterativeDeepeningSearch
 
       // Otherwise, print the path
       Console.WriteLine($"\nID-DFS found the goal at depth limit of [d={depth}]");
-      Print.Header.WithUnderline(header);
+      Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.IDLS);
       Print.Path.WithSeparator(in path);
       return;
     }

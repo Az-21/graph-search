@@ -8,11 +8,7 @@ public static class DepthLimitedSearch
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
     List<int>? path = AlgoDLS(in matrix, in config);
-
-    // Header
-    const string header = "\nDepth Limited Search Path";
-    Print.Header.WithUnderline(header);
-
+    Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.DLS);
     Print.Path.WithSeparator(in path);
   }
 

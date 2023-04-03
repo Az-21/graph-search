@@ -8,11 +8,7 @@ public static class BreadthFirstSearch
   public static void Run(in double[][] matrix, in Program.SearchWith config)
   {
     List<int>? path = Algo(in matrix, in config);
-
-    // Header
-    const string header = "\nBreadth First Search Path";
-    Print.Header.WithUnderline(header);
-
+    Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.BFS);
     Print.Path.WithSeparator(in path);
   }
 
