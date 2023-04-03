@@ -13,9 +13,10 @@ public static class Path
       sum += matrix[origin][destination];
 
       Print.Path.TravelCost(in matrix, in origin, in destination);
-      if (Input.Read.DebugFlag() && i != nodes - 2) { Console.Write(" + "); }
+      if (Input.Read.DebugFlag() && i != nodes - 2) { Console.Write("  +  "); }
     }
 
+    if (Input.Read.DebugFlag()) { Console.WriteLine(); }
     return sum;
   }
 }

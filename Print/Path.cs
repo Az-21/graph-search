@@ -20,6 +20,6 @@ public static class Path
 
     string fOrigin = Convert.NodeName.ConvertToNumberOrAlphabet(origin);
     string fDestination = Convert.NodeName.ConvertToNumberOrAlphabet(destination);
-    Console.Write($"/ {fOrigin} >> {fDestination} = {matrix[origin][destination]} /");
+    Console.Write($"`{fOrigin} >> {fDestination} = {matrix[origin][destination]}`");
   }
 }
