@@ -25,8 +25,9 @@ public static class DepthLimitedSearch
     int goalNode = config.GoalNode;
     int depthLimit = config.DepthLimit;
 
-    // Initialize a list to keep track of visited nodes
+    // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
+    HashSet<int> open = new() { startNode };
 
     // Initialize last come first serve stack -> Initialize with starting condition
     Metadata start = new(startNode, 0, new List<int>());
@@ -35,6 +36,9 @@ public static class DepthLimitedSearch
     // Recursively iterate over stack
     while (stack.Count > 0)
     {
+      // Print open list and closed list | IF_DEF
+      Print.Debug.OpenAndVisitedList(in open, in visited);
+
       // Capture and pop last
       int iLast = stack.Count - 1;
       int node = stack[iLast].Name;
@@ -50,7 +54,8 @@ public static class DepthLimitedSearch
         continue;
       }
 
-      // Otherwise, append the node to the visited list
+      // Otherwise, append the node to the visited list and remove from open list
+      open.Remove(node);
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);
 
@@ -86,6 +91,15 @@ public static class DepthLimitedSearch
       depth++; // Children of a node get +1 depth
       foreach (int child in children)
       {
+        // Check if the child already exists in open list
+        if (open.Contains(child))
+        {
+          Print.Debug.Message(in child, Print.About.AlreadyInOpenList);
+          continue;
+        }
+
+        // Stack if the child is not present in open list
+        open.Add(child);
         Print.Debug.Message(in child, Print.About.Appended);
         stack.Add(new Metadata(child, depth, newPath));
       }
