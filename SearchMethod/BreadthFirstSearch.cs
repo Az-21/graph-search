@@ -10,7 +10,7 @@ public static class BreadthFirstSearch
     List<int>? path = FindPathByBFS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.BFS);
     Print.Path.WithSeparator(in path);
-    if (path is not null) { Console.WriteLine($"Cost = {Convert.Path.ToCost(in matrix, in path)}"); }
+    Helper.PrintPathCost(in matrix, in path);
   }
 
   // BFS Algorithm

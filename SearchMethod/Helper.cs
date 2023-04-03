@@ -16,4 +16,13 @@ public static class Helper
 
     return children;
   }
+
+  // Total traversal cost
+  public static void PrintPathCost(in double[][] matrix, in List<int>? path)
+  {
+    if (path is null) { return; }
+
+    double cost = Convert.Path.ToCost(in matrix, in path);
+    Console.WriteLine($"Total cost = {cost}");
+  }
 }

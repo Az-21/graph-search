@@ -10,7 +10,7 @@ public static class UniformCostSearch
     List<int>? path = FindPathByUCS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.UCS);
     Print.Path.WithSeparator(in path);
-    if (path is not null) { Console.WriteLine($"Cost = {Convert.Path.ToCost(in matrix, in path)}"); }
+    Helper.PrintPathCost(in matrix, in path);
   }
 
   // UCS Algorithm
