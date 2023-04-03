@@ -41,7 +41,7 @@ public static class BreadthFirstSearch
       // Capture and pop first element in queue
       int node = queue.Peek().Name; // queue[0].Name
       List<int> nodePath = queue.Peek().Path; // queue[0].Path
-      queue.Dequeue();
+      queue.Dequeue(); // queue.pop(0)
       Print.Debug.Message(in node, Print.About.PoppedNode);
 
       // Check if the node already exists in the visited list
