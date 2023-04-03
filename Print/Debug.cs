@@ -10,6 +10,7 @@ public enum About
   AddedToVisited,
   AlreadyVisited,
   AppendedWithCost,
+  AlreadyInOpenList,
   ReachedDepthLimit,
   PoppedNodeWithMinCuCost,
   CostHigherThanCurrentBest,
@@ -33,6 +34,9 @@ public static class Debug
 
       case Print.About.PoppedNode:
         Console.WriteLine($"Popped `Node {id}` from the stack/queue"); break;
+
+      case Print.About.AlreadyInOpenList:
+        Console.WriteLine($"\tx Not appending `Node {id}` because it is already in open list"); break;
 
       case Print.About.AlreadyVisited:
         Console.WriteLine($"\t! `Node {id}` is already in visited list\n"); break;
@@ -83,5 +87,15 @@ public static class Debug
       case Print.About.Exhausted:
         Console.WriteLine("Exhausted stack/queue. Terminating search."); break;
     }
+  }
+
+  public static void OpenAndVisitedList(in HashSet<int> open, in HashSet<int> visited)
+  {
+    if (!Input.Read.DebugFlag()) { return; }
+
+    List<string> fOpen = Convert.NodeName.ConvertListToNumberOrAlphabet(open);
+    List<string> fVisited = Convert.NodeName.ConvertListToNumberOrAlphabet(visited);
+    Console.WriteLine($"Closed list: {{ {string.Join(", ", fVisited)} }}");
+    Console.WriteLine($"Open list: {{ {string.Join(", ", fOpen)} }}");
   }
 }
