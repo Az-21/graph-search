@@ -24,8 +24,9 @@ public static class DepthFirstSearch
     int startNode = config.StartNode;
     int goalNode = config.GoalNode;
 
-    // Initialize a list to keep track of visited nodes
+    // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
+    HashSet<int> open = new() { startNode };
 
     // Initialize last come first serve stack -> Initialize with starting condition
     Metadata start = new(startNode, new List<int>());
@@ -34,6 +35,9 @@ public static class DepthFirstSearch
     // Recursively iterate over stack
     while (stack.Count > 0)
     {
+      // Print open list and closed list | IF_DEF
+      Print.Debug.OpenAndVisitedList(in open, in visited);
+
       // Capture and pop last
       int iLast = stack.Count - 1;
       int node = stack[iLast].Name;
@@ -48,7 +52,8 @@ public static class DepthFirstSearch
         continue;
       }
 
-      // Otherwise, append the node to the visited list
+      // Otherwise, append the node to the visited list and remove from open list
+      open.Remove(node);
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);
 
@@ -76,6 +81,15 @@ public static class DepthFirstSearch
       newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
+        // Check if the child already exists in open list
+        if (open.Contains(child))
+        {
+          Print.Debug.Message(in child, Print.About.AlreadyInOpenList);
+          continue;
+        }
+
+        // Stack if the child is not present in open list
+        open.Add(child);
         Print.Debug.Message(in child, Print.About.Appended);
         stack.Add(new Metadata(child, newPath));
       }
