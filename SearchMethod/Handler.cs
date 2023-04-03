@@ -6,6 +6,9 @@ public static class Handler
     // Print parsed matrix | IF_DEF
     Print.Matrix.FromParsedCsv(in matrix);
 
+    // Search configuration/constraints
+    Print.Configuration.Details(in searchWith);
+
     // DFS
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DLS, false);
     DepthFirstSearch.Run(in matrix, in searchWith);
