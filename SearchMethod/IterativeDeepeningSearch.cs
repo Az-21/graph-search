@@ -32,6 +32,7 @@ public static class IterativeDeepeningSearch
       Console.WriteLine($"\nID-DFS found the goal at depth limit of [d={depth}]");
       Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.IDLS);
       Print.Path.WithSeparator(in path);
+      if (path is not null) { Console.WriteLine($"Cost = {Convert.Path.ToCost(in matrix, in path)}"); }
       return;
     }
   }

@@ -10,6 +10,7 @@ public static class DepthFirstSearch
     List<int>? path = FindPathByDFS(in matrix, in config);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.DFS);
     Print.Path.WithSeparator(in path);
+    if (path is not null) { Console.WriteLine($"Cost = {Convert.Path.ToCost(in matrix, in path)}"); }
   }
 
   // DFS Algorithm
