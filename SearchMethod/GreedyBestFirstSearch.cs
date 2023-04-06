@@ -13,7 +13,7 @@ public static class GreedyBestFirstSearch
     Helper.PrintPathCost(in matrix, in path);
   }
 
-  // UCS Algorithm
+  // GBFS Algorithm
   private static List<int>? FindPathByGBFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
