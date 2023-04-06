@@ -13,7 +13,9 @@ public enum About
   AppendedWithCost,
   AlreadyInOpenList,
   ReachedDepthLimit,
+  AppendedWithHeuristic,
   PoppedNodeWithMinCuCost,
+  PoppedNodeWithMinHnCost,
   FoundNodeWithLowerCuCost,
   CostHigherThanCurrentBest,
 };
@@ -67,6 +69,10 @@ public static class Debug
         Console.WriteLine($"\t+ Appended `Node {id}` with cumulative cost of {cost} (previous best was {best})");
         break;
 
+      case Print.About.AppendedWithHeuristic:
+        Console.WriteLine($"\t+ Appended `Node {id}` with heuristic of h({id}) = {cost}");
+        break;
+
       case Print.About.CostHigherThanCurrentBest:
         Console.WriteLine($"\tx Not appending `Node {id}` with cumulative cost of {cost} because current best is {best}");
         break;
@@ -77,6 +83,10 @@ public static class Debug
 
       case Print.About.FoundNodeWithLowerCuCost:
         Console.WriteLine($"\t> `Node {id}` with cost of {cost} is a dead end because another path with cost of {best} was found");
+        break;
+
+      case Print.About.PoppedNodeWithMinHnCost:
+        Console.WriteLine($"Popped `Node {id}` from the stack because it has lowest heuristic value of {cost}");
         break;
     }
   }
@@ -128,6 +138,19 @@ public static class Debug
     {
       string node = Convert.NodeName.ConvertToNumberOrAlphabet(item.Key);
       Console.Write($"{node}: {item.Value}; ");
+    }
+    Console.WriteLine();
+  }
+
+  public static void HeuristicValuesOfOpenNodes(in List<SearchMethod.GreedyBestFirstSearch.MetadataGBFS> stack)
+  {
+    if (!Input.Read.DebugFlag()) { return; }
+
+    Console.WriteLine("\nHeuristic values of currently open nodes");
+    foreach (var item in stack)
+    {
+      string node = Convert.NodeName.ConvertToNumberOrAlphabet(item.Name);
+      Console.Write($"{node}: {item.Heuristic}; ");
     }
     Console.WriteLine();
   }
