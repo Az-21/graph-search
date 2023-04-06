@@ -1,4 +1,6 @@
-﻿namespace Search;
+﻿using Search.Input;
+
+namespace Search;
 public static class Program
 {
   // Global constants for debugging and tracing steps
@@ -13,8 +15,11 @@ public static class Program
     // Read and parse adjacency matrix from CSV
     double[][] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
 
-    // Run search using all search methods
+    // Search configuration
     SearchWith options = new(StartNode: 0, GoalNode: 6, DepthLimit: 1);
+    Verify.Configuration(in matrix, in options);
+
+    // Run search using all search methods
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
   }
 }
