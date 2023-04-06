@@ -28,8 +28,9 @@ public static class AStarSearch
     List<MetadataAStar> stack = new() { start };
 
     // Initialize a dictionary to only keep the least `cumulative cost + heuristic cost` for each node
-    Dictionary<int, double> minCost = new();
-    for (int i = 0; i < matrix.GetLength(0); i++) { minCost.Add(i, int.MaxValue); }
+    int n = matrix.GetLength(0); // Total number of nodes
+    Dictionary<int, double> minCost = new(n);
+    for (int i = 0; i < n; i++) { minCost.Add(i, int.MaxValue); }
     minCost[startNode] = 0 + h[startNode]; // Cost(n) = cumulative(n) + h(n)
 
     // Recursively iterate over stack
