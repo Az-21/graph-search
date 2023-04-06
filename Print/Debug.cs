@@ -70,7 +70,7 @@ public static class Debug
         break;
 
       case Print.About.AppendedWithHeuristic:
-        Console.WriteLine($"\t+ Appended `Node {id}` with heuristic of h({id}) = {cost}");
+        Console.WriteLine($"\t+ Appended `Node {id}` with heuristic value h({id}) = {cost}");
         break;
 
       case Print.About.CostHigherThanCurrentBest:
