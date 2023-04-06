@@ -14,10 +14,11 @@ public enum About
   AlreadyInOpenList,
   ReachedDepthLimit,
   AppendedWithHeuristic,
+  FoundNodeWithLowerCost,
   PoppedNodeWithMinCuCost,
   PoppedNodeWithMinHnCost,
-  FoundNodeWithLowerCuCost,
   CostHigherThanCurrentBest,
+  PoppedNodeWithMinTotalCost,
 };
 
 public static class Debug
@@ -66,7 +67,7 @@ public static class Debug
     switch (message)
     {
       case Print.About.AppendedWithCost:
-        Console.WriteLine($"\t+ Appended `Node {id}` with cumulative cost of {cost} (previous best was {best})");
+        Console.WriteLine($"\t+ Appended `Node {id}` with cost of {cost} (previous best was {best})");
         break;
 
       case Print.About.AppendedWithHeuristic:
@@ -74,19 +75,23 @@ public static class Debug
         break;
 
       case Print.About.CostHigherThanCurrentBest:
-        Console.WriteLine($"\tx Not appending `Node {id}` with cumulative cost of {cost} because current best is {best}");
+        Console.WriteLine($"\tx Not appending `Node {id}` with cost of {cost} because current best is {best}");
         break;
 
       case Print.About.PoppedNodeWithMinCuCost:
         Console.WriteLine($"Popped `Node {id}` from the stack/queue because it has lowest cumulative cost of {cost}");
         break;
 
-      case Print.About.FoundNodeWithLowerCuCost:
+      case Print.About.FoundNodeWithLowerCost:
         Console.WriteLine($"\t> `Node {id}` with cost of {cost} is a dead end because another path with cost of {best} was found");
         break;
 
       case Print.About.PoppedNodeWithMinHnCost:
         Console.WriteLine($"Popped `Node {id}` from the stack because it has lowest heuristic value of {cost}");
+        break;
+
+      case Print.About.PoppedNodeWithMinTotalCost:
+        Console.WriteLine($"Popped `Node {id}` from the stack because it has lowest total cost of {cost}");
         break;
     }
   }
@@ -129,11 +134,11 @@ public static class Debug
   }
 
   // Debug messages about the heuristic values and current best estimations
-  public static void CurrentBestCumulative(in Dictionary<int, double> kvp)
+  public static void CurrentBestNode(in Dictionary<int, double> kvp)
   {
     if (!Input.Read.DebugFlag()) { return; }
 
-    Console.WriteLine("\nCurrent best cumulative cost of each node");
+    Console.WriteLine("\nCurrent best cost of each node");
     foreach (KeyValuePair<int, double> item in kvp)
     {
       string node = Convert.NodeName.ConvertToNumberOrAlphabet(item.Key);
