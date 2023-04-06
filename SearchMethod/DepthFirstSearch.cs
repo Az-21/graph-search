@@ -41,14 +41,7 @@ public static class DepthFirstSearch
       stack.RemoveAt(iLast);
       Print.Debug.Message(in node, Print.About.PoppedNode);
 
-      // Check if the node already exists in the visited list
-      if (visited.Contains(node))
-      {
-        Print.Debug.Message(in node, Print.About.AlreadyVisited);
-        continue;
-      }
-
-      // Otherwise, append the node to the visited list and remove from open list
+      // Append the node to the visited list and remove from open list
       open.Remove(node);
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);

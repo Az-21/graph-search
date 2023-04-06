@@ -60,7 +60,7 @@ public static class GreedyBestFirstSearch
         return nodePath.Append(node).ToList();
       }
 
-      // Otherwise, append the node to the visited list and remove from open list
+      // Append the node to the visited list and remove from open list
       open.Remove(node);
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);
