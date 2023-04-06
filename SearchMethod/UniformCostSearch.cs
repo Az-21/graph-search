@@ -25,15 +25,15 @@ public static class UniformCostSearch
     List<Metadata> stack = new() { start };
 
     // Initialize a dictionary to only keep the least cumulative cost for each node
-    Dictionary<int, double> leastCost = new();
-    for (int i = 0; i < matrix.GetLength(0); i++) { leastCost.Add(i, int.MaxValue); }
-    leastCost[startNode] = 0; // Cumulative cost of starting node is 0
+    Dictionary<int, double> minCost = new();
+    for (int i = 0; i < matrix.GetLength(0); i++) { minCost.Add(i, int.MaxValue); }
+    minCost[startNode] = 0; // Cumulative cost of starting node is 0
 
     // Recursively iterate over stack
     while (stack.Count > 0)
     {
       // Print the KVP of node and best cumulative distance
-      Print.Debug.CurrentBestNode(in leastCost);
+      Print.Debug.CurrentBestNode(in minCost);
 
       // Pop the node with lowest cumulative cost
       stack = stack.OrderBy(x => x.CumulativeCost).ToList(); // Ensures stack[0] has lowest CC
@@ -44,9 +44,9 @@ public static class UniformCostSearch
       Print.Debug.Message(in node, Print.About.PoppedNodeWithMinCuCost, cumulativeCost);
 
       // Handle a special case when a newer cumulative cost is found **after** a node has been pushed to stack
-      if (cumulativeCost > leastCost[node])
+      if (cumulativeCost > minCost[node])
       {
-        Print.Debug.Message(in node, Print.About.FoundNodeWithLowerCost, in cumulativeCost, leastCost[node]);
+        Print.Debug.Message(in node, Print.About.FoundNodeWithLowerCost, in cumulativeCost, minCost[node]);
         continue;
       }
 
@@ -76,19 +76,19 @@ public static class UniformCostSearch
       foreach (int child in children)
       {
         // Ensure a value corresponding to least CuSum exists in dictionary (eg: node 10 in 7x7 matrix)
-        if (!leastCost.ContainsKey(child)) { leastCost.Add(child, int.MaxValue); }
+        if (!minCost.ContainsKey(child)) { minCost.Add(child, int.MaxValue); }
 
         // Only add the element to the stack if the CuSum of child < current best CuSum
         double ccChild = cumulativeCost + matrix[node][child];
-        if (ccChild >= leastCost[child])
+        if (ccChild >= minCost[child])
         {
-          Print.Debug.Message(in child, Print.About.CostHigherThanCurrentBest, in ccChild, leastCost[child]);
+          Print.Debug.Message(in child, Print.About.CostHigherThanCurrentBest, in ccChild, minCost[child]);
           continue;
         }
 
         // If this is the new minimum CuSum, update the dictionary
-        Print.Debug.Message(in child, Print.About.AppendedWithCost, in ccChild, leastCost[child]);
-        leastCost[child] = ccChild;
+        Print.Debug.Message(in child, Print.About.AppendedWithCost, in ccChild, minCost[child]);
+        minCost[child] = ccChild;
         stack.Add(new Metadata(child, ccChild, newPath));
       }
 
