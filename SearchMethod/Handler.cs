@@ -32,5 +32,9 @@ public static class Handler
     // GBFS
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.GBFS, isInformed: true);
     GreedyBestFirstSearch.Run(in matrix, in searchWith);
+
+    // A*
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.ASTAR, isInformed: true);
+    AStarSearch.Run(in matrix, in searchWith);
   }
 }
