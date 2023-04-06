@@ -28,5 +28,9 @@ public static class Handler
     // UCS
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.UCS, false);
     UniformCostSearch.Run(in matrix, in searchWith);
+
+    // GBFS
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.GBFS, isInformed: true);
+    GreedyBestFirstSearch.Run(in matrix, in searchWith);
   }
 }
