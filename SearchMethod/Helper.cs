@@ -23,7 +23,7 @@ public static class Helper
     int n = matrix.GetLength(0);
     double[] h = new double[n]; // Heuristic h(n)
 
-    // Get (i, j) where i == j
+    // Get Matrix[i, j] where i == j
     for (int i = 0; i < n; i++) { for (int j = 0; j < n; j++) { if (i == j) { h[i] = matrix[i][i]; } } }
     return h;
   }
