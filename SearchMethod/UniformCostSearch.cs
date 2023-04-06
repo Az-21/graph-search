@@ -75,9 +75,6 @@ public static class UniformCostSearch
       newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
-        // Ensure a value corresponding to least CuSum exists in dictionary (eg: node 10 in 7x7 matrix)
-        if (!minCost.ContainsKey(child)) { minCost.Add(child, int.MaxValue); }
-
         // Only add the element to the stack if the CuSum of child < current best CuSum
         double ccChild = cumulativeCost + matrix[node][child];
         if (ccChild >= minCost[child])

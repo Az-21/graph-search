@@ -23,7 +23,7 @@ public static class AStarSearch
     // Parse heuristic table from adjacency matrix
     double[] h = Helper.GetHeuristics(in matrix);
 
-    // Initialize lowest cumulative cost node first stack -> Initialize with starting condition
+    // Initialize lowest <cumulative + hueristic> cost node first stack -> Initialize with starting condition
     MetadataAStar start = new(startNode, 0, h[startNode], new List<int>());
     List<MetadataAStar> stack = new() { start };
 
@@ -80,9 +80,6 @@ public static class AStarSearch
       newPath.AddRange(nodePath); newPath.Add(node);
       foreach (int child in children)
       {
-        // Ensure a value corresponding to node cost exists in dictionary (eg: node 10 in 7x7 matrix)
-        if (!minCost.ContainsKey(child)) { minCost.Add(child, int.MaxValue); }
-
         // Only add the element to the stack if the cost of child > current best cost of child
         double cuChild = cuCost + matrix[node][child];
         double hnChild = h[child];
