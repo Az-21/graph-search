@@ -3,8 +3,6 @@
 namespace Search.Input;
 public static class AdjacencyList
 {
-
-
   public static double[][] ConvertToMatrix(in string path)
   {
     // Read JSON from specified path
