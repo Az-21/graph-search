@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Input\Graphs\" />
+    <Folder Include="Graphs\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Input\Graphs\graph01.csv">
+    <None Update="Graphs\graph01.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
