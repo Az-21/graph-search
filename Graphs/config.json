@@ -1,0 +1,5 @@
+{
+  "GraphName": "matrix01.csv",
+  "StartNode": "A",
+  "GoalNode": "G"
+}
