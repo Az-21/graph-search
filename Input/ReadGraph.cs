@@ -1,13 +1,11 @@
 ﻿namespace Search.Input;
 public static class ReadGraph
 {
-  // Construct path to "./Input/Graph/filename"
+  // Construct path to ".Graph/filename"
   private static string GetGraphPath(in string filename)
   {
-    const string source = "Graphs"; // Folder containing all the graphs as .CSV || .JSON
-
     // Combine method takes care of directory separator (Win\\, UNIX/) internally
-    string path = Path.Combine(Directory.GetCurrentDirectory(), source, filename);
+    string path = Path.Combine(Directory.GetCurrentDirectory(), "Graphs", filename);
 
     // Check if a file at specified path exists
     if (!File.Exists(path))
