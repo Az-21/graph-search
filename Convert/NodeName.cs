@@ -34,7 +34,7 @@ public static class NodeName
   }
 
   // Base26 to Base10 | A->0, B->1, Z->25, AA->26
-  private static int FromAlphabetToNumber(in string alphabet)
+  public static int FromAlphabetToNumber(in string alphabet)
   {
     int result = 0;
     int power = 0;
