@@ -1,6 +1,4 @@
-﻿using Search.Input;
-
-namespace Search;
+﻿namespace Search;
 public static class Program
 {
   // Global constants for debugging and tracing steps
@@ -18,7 +16,7 @@ public static class Program
     // Search configuration
     int n = matrix.GetLength(0); // NxN matrix dimension
     SearchWith options = new(StartNode: 0, GoalNode: 6, n);
-    Verify.Configuration(in matrix, in options);
+    Input.Verify.Configuration(in matrix, in options);
 
     // Run search using all search methods
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
