@@ -10,14 +10,16 @@ public static class Program
 
   static void Main()
   {
+    // Get search options/parameters from `config.json`
+    Input.Config.SearchParameters config = Input.Config.ParseConfig();
+
     // Read and parse adjacency graph | Supports .CSV for adjacency matrix and .JSON for adjacency list
-    const string filename = "matrix01.csv";
-    double[][] matrix = Input.ReadGraph.WithFilename(filename);
+    double[][] matrix = Input.ReadGraph.WithFilename(config.GraphName);
 
     // Search configuration
     int n = matrix.GetLength(0); // NxN matrix dimension
-    SearchWith options = new(StartNode: 0, GoalNode: 6, n);
-    Input.Verify.Configuration(in matrix, in options);
+    SearchWith options = new(StartNode: config.StartNode, GoalNode: config.GoalNode, n);
+    Input.Verify.Configuration(in options);
 
     // Run search using all search methods
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
