@@ -4,11 +4,19 @@ public static class ReadGraph
   // Construct path to "./Input/Graph/filename"
   private static string GetGraphPath(in string filename)
   {
-    const string r1 = "Input"; // Relative path root
-    const string r2 = "Graphs"; // Relative path child
+    const string source = "Graphs"; // Folder containing all the graphs as .CSV || .JSON
 
     // Combine method takes care of directory separator (Win\\, UNIX/) internally
-    return Path.Combine(Directory.GetCurrentDirectory(), r1, r2, filename);
+    string path = Path.Combine(Directory.GetCurrentDirectory(), source, filename);
+
+    // Check if a file at specified path exists
+    if (!File.Exists(path))
+    {
+      Console.WriteLine($"[ FATAL ]\tFile `{filename}` does not exist in `Graphs` folder");
+      System.Environment.Exit(3);
+    }
+
+    return path;
   }
 
   public static double[][] WithFilename(in string filename)
