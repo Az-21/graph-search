@@ -10,8 +10,9 @@ public static class Program
 
   static void Main()
   {
-    // Read and parse adjacency matrix from CSV
-    double[][] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
+    // Read and parse adjacency graph | Supports .CSV for adjacency matrix and .JSON for adjacency list
+    const string filename = "graph01.csv";
+    double[][] matrix = Input.ReadGraph.WithFilename(filename);
 
     // Search configuration
     int n = matrix.GetLength(0); // NxN matrix dimension

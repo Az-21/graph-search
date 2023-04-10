@@ -2,16 +2,6 @@
 
 public static class Matrix
 {
-  // Construct path to "./Input/Graph/graph.csv"
-  private static string GetCsvPath(in string csv)
-  {
-    const string r1 = "Input"; // Relative path root
-    const string r2 = "Graphs"; // Relative path child
-
-    // Combine method takes care of directory separator (Win\\, UNIX/) internally
-    return Path.Combine(Directory.GetCurrentDirectory(), r1, r2, csv);
-  }
-
   // Convert a comma separated string to array of double
   private static double[] ParseCsvAsDouble(in string input, in int n)
   {
@@ -22,10 +12,10 @@ public static class Matrix
     return doubles;
   }
 
-  public static double[][] ParseSquareMatrixCsv(in string csv = "graph01.csv")
+  public static double[][] ParseSquareMatrixCsv(in string path)
   {
     // Read CSV as stream of lines
-    using StreamReader reader = new(GetCsvPath(csv));
+    using StreamReader reader = new(path);
 
     // Read the first line to get the number of nodes -> create NxN matrix
     string firstLine = reader.ReadLine()!;
