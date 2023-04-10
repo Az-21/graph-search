@@ -1,7 +1,7 @@
 ﻿namespace Search.Input;
 public static class Verify
 {
-  public static void Configuration(in double[][] matrix, in Program.SearchWith config)
+  public static void Configuration(in Program.SearchWith config)
   {
     int n = config.NxN;
 
