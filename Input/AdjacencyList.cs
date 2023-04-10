@@ -3,8 +3,17 @@
 namespace Search.Input;
 public static class AdjacencyList
 {
-  public static double[][] ConvertToMatrix(string json)
+
+
+  public static double[][] ConvertToMatrix(in string path)
   {
+    // Read JSON from specified path
+    string json;
+    using (StreamReader sr = new(path))
+    {
+      json = sr.ReadToEnd();
+    }
+
     // Preprocess JSON
     json = json.Trim();
     json = json.ToUpperInvariant();
