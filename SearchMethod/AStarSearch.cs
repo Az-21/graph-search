@@ -17,18 +17,18 @@ public static class AStarSearch
   private static List<int>? FindPathByAStar(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
-    int startNode = config.StartNode;
+    int n = config.NxN;
     int goalNode = config.GoalNode;
+    int startNode = config.StartNode;
 
     // Parse heuristic table from adjacency matrix
-    double[] h = Helper.GetHeuristics(in matrix);
+    double[] h = Helper.GetHeuristics(in matrix, in n);
 
     // Initialize lowest <cumulative + hueristic> cost node first stack -> Initialize with starting condition
     MetadataAStar start = new(startNode, 0, h[startNode], new List<int>());
     List<MetadataAStar> stack = new() { start };
 
     // Initialize a dictionary to only keep the least `cumulative cost + heuristic cost` for each node
-    int n = matrix.GetLength(0); // Total number of nodes
     Dictionary<int, double> minCost = new(n);
     for (int i = 0; i < n; i++) { minCost.Add(i, int.MaxValue); }
     minCost[startNode] = 0 + h[startNode]; // Cost(n) = cumulative(n) + h(n)
@@ -64,7 +64,7 @@ public static class AStarSearch
       }
 
       // Otherwise append the children of current node to the stack
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in node); // Sorting is **not** required
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node, in n); // Sorting is **not** required
 
       // Skip to next item in stack for empty children set (duplicates or empty)
       if (children.Count == 0)

@@ -17,8 +17,9 @@ public static class DepthFirstSearch
   private static List<int>? FindPathByDFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
-    int startNode = config.StartNode;
+    int n = config.NxN;
     int goalNode = config.GoalNode;
+    int startNode = config.StartNode;
 
     // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
@@ -54,7 +55,7 @@ public static class DepthFirstSearch
       }
 
       // Otherwise append the children of current node to the stack
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in node);
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node, in n);
       children.Sort(); children.Reverse(); // Sort and reverse to ensure [C, B, A] like order, A will pop next
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter out visited nodes
 

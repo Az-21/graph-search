@@ -8,7 +8,7 @@ public static class Program
   public const bool USE_ALPHABET = true;
 
   // Structure of options and constraints
-  public readonly record struct SearchWith(int StartNode, int GoalNode);
+  public readonly record struct SearchWith(int StartNode, int GoalNode, int NxN);
 
   static void Main()
   {
@@ -16,7 +16,8 @@ public static class Program
     double[][] matrix = Input.Matrix.ParseSquareMatrixCsv("graph01.csv");
 
     // Search configuration
-    SearchWith options = new(StartNode: 0, GoalNode: 6);
+    int n = matrix.GetLength(0); // NxN matrix dimension
+    SearchWith options = new(StartNode: 0, GoalNode: 6, n);
     Verify.Configuration(in matrix, in options);
 
     // Run search using all search methods

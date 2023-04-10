@@ -17,8 +17,9 @@ public static class BreadthFirstSearch
   private static List<int>? FindPathByBFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
-    int startNode = config.StartNode;
+    int n = config.NxN;
     int goalNode = config.GoalNode;
+    int startNode = config.StartNode;
 
     // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
@@ -53,7 +54,7 @@ public static class BreadthFirstSearch
       }
 
       // Otherwise append the children of current node to the queue
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in node);
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node, in n);
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter visited nodes
       children.Sort(); // Sort to ensure [A, B, C] like order, A will eventually pop first
 

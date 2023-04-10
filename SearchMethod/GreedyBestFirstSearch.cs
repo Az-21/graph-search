@@ -17,15 +17,16 @@ public static class GreedyBestFirstSearch
   private static List<int>? FindPathByGBFS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
-    int startNode = config.StartNode;
+    int n = config.NxN;
     int goalNode = config.GoalNode;
+    int startNode = config.StartNode;
 
     // Initialize a list to keep track of visited nodes and currently open nodes
     HashSet<int> visited = new();
     HashSet<int> open = new() { startNode };
 
     // Parse heuristic table from adjacency matrix
-    double[] h = Helper.GetHeuristics(in matrix);
+    double[] h = Helper.GetHeuristics(in matrix, in n);
 
     // Initialize lowest cumulative cost node first stack -> Initialize with starting condition
     MetadataGBFS start = new(startNode, h[startNode], new List<int>());
@@ -66,7 +67,7 @@ public static class GreedyBestFirstSearch
       Print.Debug.Message(in node, Print.About.AddedToVisited);
 
       // Otherwise append the children of current node to the stack
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in node); // Sorting is **not** required
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node, in n); // Sorting is **not** required
       children = children.Where(x => !visited.Contains(x)).ToList(); // Filter out visited nodes
 
       // Skip to next item in stack for empty children set (duplicates or empty)

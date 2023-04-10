@@ -3,8 +3,7 @@ public static class Verify
 {
   public static void Configuration(in double[][] matrix, in Program.SearchWith config)
   {
-    // Dimension of NxN matrix
-    int n = matrix.GetLength(0);
+    int n = config.NxN;
 
     // Verify start node
     if (config.StartNode >= n)

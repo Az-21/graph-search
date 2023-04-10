@@ -4,7 +4,8 @@ public static class Handler
   public static void SearchUsingAllMethods(in double[][] matrix, in Program.SearchWith searchWith)
   {
     // Print parsed matrix | IF_DEF
-    Print.Matrix.FromParsedCsv(in matrix);
+    int n = searchWith.NxN;
+    Print.Matrix.FromParsedCsv(in matrix, in n);
 
     // Search configuration/constraints
     Print.Configuration.Details(in searchWith);

@@ -17,15 +17,15 @@ public static class UniformCostSearch
   private static List<int>? FindPathByUCS(in double[][] matrix, in Program.SearchWith config)
   {
     // Unpack search options
-    int startNode = config.StartNode;
+    int n = config.NxN;
     int goalNode = config.GoalNode;
+    int startNode = config.StartNode;
 
     // Initialize lowest cumulative cost node first stack -> Initialize with starting condition
     Metadata start = new(startNode, 0, new List<int>());
     List<Metadata> stack = new() { start };
 
     // Initialize a dictionary to only keep the least cumulative cost for each node
-    int n = matrix.GetLength(0); // Total number of nodes
     Dictionary<int, double> minCost = new(n);
     for (int i = 0; i < n; i++) { minCost.Add(i, int.MaxValue); }
     minCost[startNode] = 0; // Cumulative cost of starting node is 0
@@ -59,7 +59,7 @@ public static class UniformCostSearch
       }
 
       // Otherwise append the children of current node to the stack
-      List<int> children = Helper.GetChildrenOfNode(in matrix, in node); // Sorting is **not** required
+      List<int> children = Helper.GetChildrenOfNode(in matrix, in node, in n); // Sorting is **not** required
 
       // Skip to next item in stack for empty children set (duplicates or empty)
       if (children.Count == 0)

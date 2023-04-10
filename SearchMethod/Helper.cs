@@ -2,10 +2,10 @@
 public static class Helper
 {
   // Returns name/id of children of a node as an array
-  public static List<int> GetChildrenOfNode(in double[][] matrix, in int node)
+  public static List<int> GetChildrenOfNode(in double[][] matrix, in int node, in int n)
   {
     List<int> children = new();
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < n; i++)
     {
       // Skip the diagonal node which contains heuristic value h(n) -> Not used in DFS
       if (i == node) { continue; }
@@ -18,9 +18,8 @@ public static class Helper
   }
 
   // Returns the primary diagonal values of matrix -> h(n) | h[0] -> h(node 0)
-  public static double[] GetHeuristics(in double[][] matrix)
+  public static double[] GetHeuristics(in double[][] matrix, in int n)
   {
-    int n = matrix.GetLength(0);
     double[] h = new double[n]; // Heuristic h(n)
 
     // Get Matrix[i, j] where i == j

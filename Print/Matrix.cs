@@ -1,12 +1,9 @@
 ﻿namespace Search.Print;
 public static class Matrix
 {
-  public static void FromParsedCsv(in double[][] matrix)
+  public static void FromParsedCsv(in double[][] matrix, in int n)
   {
     if (!Input.Read.DebugFlag()) { return; }
-
-    // Get dimension of square matrix
-    int n = matrix.GetLength(0);
 
     // Header
     string header = $"Parsed CSV as a(n) {n}x{n} matrix";
