@@ -5,6 +5,5 @@ public static class Configuration
   {
     Console.WriteLine($"Start node -> {Convert.NodeName.ConvertToNumberOrAlphabet(config.StartNode)}");
     Console.WriteLine($"Goal node -> {Convert.NodeName.ConvertToNumberOrAlphabet(config.GoalNode)}");
-    Console.WriteLine($"Depth limit = {config.DepthLimit}\t\t(limit only applies to DLS)");
   }
 }

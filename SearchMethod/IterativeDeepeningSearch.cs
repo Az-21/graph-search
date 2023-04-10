@@ -18,8 +18,7 @@ public static class IterativeDeepeningSearch
       }
 
       // Try to find a path at current depth. Start from 0
-      Program.SearchWith iDepth = new(config.StartNode, config.GoalNode, depth);
-      List<int>? path = DepthLimitedSearch.FindPathByDLS(in matrix, in iDepth);
+      List<int>? path = DepthLimitedSearch.FindPathByDLS(in matrix, in config, depth);
 
       // Increment depth if a path was not found
       if (path is null)

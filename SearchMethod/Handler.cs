@@ -18,8 +18,9 @@ public static class Handler
     BreadthFirstSearch.Run(in matrix, in searchWith);
 
     // DLS
+    const int depthLimit = 4;
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DLS, false);
-    DepthLimitedSearch.Run(in matrix, in searchWith);
+    DepthLimitedSearch.Run(in matrix, in searchWith, depthLimit);
 
     // ID-DFS (IDLS)
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.IDLS, false);

@@ -5,21 +5,20 @@ public static class DepthLimitedSearch
   private readonly record struct Metadata(int Name, int Depth, List<int> Path);
 
   // Wrapper for DLS algorithm
-  public static void Run(in double[][] matrix, in Program.SearchWith config)
+  public static void Run(in double[][] matrix, in Program.SearchWith config, in int depthLimit)
   {
-    List<int>? path = FindPathByDLS(in matrix, in config);
+    List<int>? path = FindPathByDLS(in matrix, in config, in depthLimit);
     Print.Header.PathWithUnderline(Print.HeaderOfSearchMethod.DLS);
     Print.Path.WithSeparator(in path);
     Helper.PrintPathCost(in matrix, in path);
   }
 
   // DLS Algorithm
-  public static List<int>? FindPathByDLS(in double[][] matrix, in Program.SearchWith config)
+  public static List<int>? FindPathByDLS(in double[][] matrix, in Program.SearchWith config, in int depthLimit)
   {
     // Unpack search options
     int startNode = config.StartNode;
     int goalNode = config.GoalNode;
-    int depthLimit = config.DepthLimit;
 
     // Initialize a list to keep track of visited nodes and open nodes
     HashSet<int> visited = new();
