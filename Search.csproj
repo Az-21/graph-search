@@ -11,6 +11,9 @@
     <None Update="Graphs\config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Graphs\list01.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Graphs\matrix01.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
