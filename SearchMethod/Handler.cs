@@ -11,7 +11,7 @@ public static class Handler
     Print.Configuration.Details(in searchWith);
 
     // DFS
-    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DLS, false);
+    Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DFS, false);
     DepthFirstSearch.Run(in matrix, in searchWith);
 
     // BFS
