@@ -23,5 +23,9 @@ public static class Program
 
     // Run search using all search methods
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
+
+    // Prompt to exit
+    Console.WriteLine("\n\n\nPress any key to exit...");
+    Console.Read();
   }
 }
