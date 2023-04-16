@@ -6,7 +6,7 @@ public static class Matrix
     if (!Input.Read.DebugFlag()) { return; }
 
     // Header
-    string header = $"Parsed CSV as a(n) {n}x{n} matrix";
+    string header = $"Parsed CSV as a {n}x{n} matrix";
     Print.Header.CustomMessageWithUnderline(header);
 
     // NxN matrix
