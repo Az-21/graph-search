@@ -48,18 +48,18 @@ public static class DepthLimitedSearch
       visited.Add(node);
       Print.Debug.Message(in node, Print.About.AddedToVisited);
 
-      // Check for depth limit
-      if (depth >= depthLimit)
-      {
-        Print.Debug.Message(node, Print.About.ReachedDepthLimit, depth);
-        continue;
-      }
-
       // Check for goal state
       if (node == goalNode)
       {
         Print.Debug.Message(in node, Print.About.GoalReached);
         return nodePath.Append(node).ToList();
+      }
+
+      // Check for depth limit
+      if (depth >= depthLimit)
+      {
+        Print.Debug.Message(node, Print.About.ReachedDepthLimit, depth);
+        continue;
       }
 
       // Otherwise append the children of current node to the stack
