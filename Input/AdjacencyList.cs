@@ -36,7 +36,15 @@ public static class AdjacencyList
       string[] edges = adjList[nodes[i]].Split(",", StringSplitOptions.TrimEntries);
       foreach (string edge in edges)
       {
+        if (string.IsNullOrWhiteSpace(edge)) { continue; }
         int j = nodes.IndexOf(edge);
+
+        // Check for unexpected adjacency matrix (eg: Starting with node "S"->18 instead of "A"->0)
+        if (j == -1)
+        {
+          Console.WriteLine("Please ensure adjacency list is given in alphabetical order.");
+          System.Environment.Exit(5);
+        }
         matrix[i][j] = 1;
       }
     }
