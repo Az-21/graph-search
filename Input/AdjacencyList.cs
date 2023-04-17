@@ -26,6 +26,7 @@ public static class AdjacencyList
 
     // Even isolated and one-way nodes need to be present for this to work.
     List<string> nodes = adjList.Keys.ToList();
+    nodes.RemoveAt(nodes.Count - 1); // Pop last element, it contains heuristic data
     int size = nodes.Count;
 
     // Generate NxN matrix -> fill M(i,j) with 1 if an edge exists
@@ -48,6 +49,20 @@ public static class AdjacencyList
         matrix[i][j] = 1;
       }
     }
+
+    // Ensure the number of nodes and the number of heuristic values match
+    string[] heuristic = adjList["H(N)"].Split(",", StringSplitOptions.TrimEntries);
+    int hSize = heuristic.Length;
+    if (hSize != size)
+    {
+      Console.WriteLine($"[ FATAL ]\tExpected {size} heuristic values, got {hSize}");
+      System.Environment.Exit(6);
+    }
+
+    // Fill heuristic values in the primary diagonal of the matrix
+    double[] h = new double[hSize];
+    h = Array.ConvertAll(heuristic, double.Parse);
+    for (int i = 0; i < size; i++) { matrix[i][i] = h[i]; }
 
     return matrix;
   }
