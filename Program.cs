@@ -21,6 +21,9 @@ public static class Program
     SearchWith options = new(StartNode: config.StartNode, GoalNode: config.GoalNode, n);
     Input.Verify.Configuration(in options);
 
+    // Print the parsed config
+    Print.Configuration.Details(in config);
+
     // Run search using all search methods
     SearchMethod.Handler.SearchUsingAllMethods(in matrix, options);
 

@@ -7,9 +7,6 @@ public static class Handler
     int n = searchWith.NxN;
     Print.Matrix.FromParsedCsv(in matrix, in n);
 
-    // Search configuration/constraints
-    Print.Configuration.Details(in searchWith);
-
     // DFS
     Print.Header.SectionHeader(Print.HeaderOfSearchMethod.DFS, false);
     DepthFirstSearch.Run(in matrix, in searchWith);
