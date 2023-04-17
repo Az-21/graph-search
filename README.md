@@ -17,7 +17,9 @@
 
 This logic is programmed considering `int` based nodes. Internally, `A` is mapped to `0`, `B` is mapped to `1`, and so on. While this approach gives flexibility to add up to 2.1 billion nodes, it is also limiting in the fact that node graph has to be ordered. Program will extrapolate the values in first row as node `A | 0`, values in second row as node `B | 1`, and so on.
 
-### Add graph adjacency matrix
+### Adjacency matrix
+
+---
 
 Create a new `.csv` file in `Graphs` folder. In this adjacency matrix. Each row represents the origin node and each non-primary diagonal column represents the travel cost. The primary diagonal encodes the heuristic cost h(n). Due to these constraints, this `.csv` file must have equal number of rows and columns. Value of `0` in a non-primary diagonal element implies that these nodes are not connected.
 
@@ -43,7 +45,9 @@ The program comes with a sample adjacency matrix. It is recommended to copy-past
 
 **NOTE** All `.csv` files will be treated as an adjacency matrix.
 
-### Add graph adjacency list
+### Adjacency list
+
+---
 
 Create a new `.json` file in `Graphs` folder. In this adjacency list. Each node has a comma separated list of connected nodes. The travel cost is assumed to be `1`.
 
@@ -74,9 +78,11 @@ This adjacency list is parsed as the following adjacency matrix:
 
 The program comes with a sample adjacency list. It is recommended to copy-paste `list01.json` in `Graphs` folder to create a new adjacency list `list02.json`.
 
-**NOTE** All `.json` files will be treated as an adjacency list.
+**NOTE**: All `.json` files will be treated as an adjacency list.
 
 ### Configure search parameters
+
+---
 
 The configuration options can be found in `config.json` in `Graphs` folder. It allows you to set the graph, start node, and goal node.
 
@@ -85,8 +91,8 @@ The configuration options can be found in `config.json` in `Graphs` folder. It a
   // Graph to work on; file must be present in the `Graphs` folder
   "GraphName": "matrix01.csv",
 
-  "StartNode": "A", // "A" is equivalent to "0" after `int` mapping
-  "GoalNode": "G"   // "G" is equivalent to "6" after `int` mapping
+  "StartNode": "A", // "A" is equivalent to "0"
+  "GoalNode":  "G"  // "G" is equivalent to "6"
 }
 ```
 
