@@ -55,21 +55,22 @@ Taking a simple example to illustrate how adjacency list is parsed, consider the
   "B": "",
   "C": "A, B, D",
   "D": "C",
+  "h(n)": "9, 7, 3, 0"
 }
 ```
 
 **NOTE**: The node keys (value before `:`) must be in alphabetic order starting with `A`. Even if a node is a dead end (like `B` is in the given example), it must be present in the `.json`.
 
-This adjacency list is parsed as:
+**NOTE**: The very last key is `h(n)`. Enter the heuristic values of **all** nodes present in the graph in alphabetic order. In given example, there are 4 nodes, so 4 heuristic values are given. `h(A) = 9`, `h(B) = 7`, `h(C) = 3`, and `h(D) = 4`.
+
+This adjacency list is parsed as the following adjacency matrix:
 
 ```csv
-_, 1, 1, 0
-0, _, 0, 0
-1, 1, _, 1
-0, 0, 1, _
+9, 1, 1, 0
+0, 7, 0, 0
+1, 1, 3, 1
+0, 0, 1, 0
 ```
-
-Here `_` represent heuristic values; these are defaulted to `0` as of now. If `h(n)` values are required, please use adjacency matrix to represent the graph.
 
 The program comes with a sample adjacency list. It is recommended to copy-paste `list01.json` in `Graphs` folder to create a new adjacency list `list02.json`.
 
@@ -83,6 +84,7 @@ The configuration options can be found in `config.json` in `Graphs` folder. It a
 {
   // Graph to work on; file must be present in the `Graphs` folder
   "GraphName": "matrix01.csv",
+
   "StartNode": "A", // "A" is equivalent to "0" after `int` mapping
   "GoalNode": "G"   // "G" is equivalent to "6" after `int` mapping
 }
