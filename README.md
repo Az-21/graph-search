@@ -103,4 +103,4 @@ The configuration options can be found in `config.json` in `Graphs` folder. It a
 }
 ```
 
-After making changes in `config.json`, rerun `Simplify.exe`.
+After making changes in `config.json`, rerun `Search.exe`.
